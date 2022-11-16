@@ -1,32 +1,65 @@
 ---
+import '../styles/global.css';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Identity {
+  firstName: string;
+  country: string;
+  occupation: string;
+  hobbies: string[];
+}
+
+type Skills = string[];
+
+const pageTitle: string = 'About me';
+
+const identity: Identity = {
+  firstName: 'Andres',
+  country: 'Italy',
+  occupation: 'Software Engineer',
+  hobbies: ['Programming', 'Music', 'Gaming', 'Reading', 'Writing'],
+};
+
+const skills: Skills = ['HTML', 'CSS', 'JavaScript'];
+
+const happy: boolean = true;
+const finished: boolean = true;
+const goal: number = 3;
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <title>About</title>
-  </head>
-  <body>
-    <nav>
-      <a href='/'>Home</a>
-      <a href='/about'>About</a>
-      <a href='/blog'>Blog</a>
-    </nav>
+<BaseLayout>
+  <h1>{pageTitle}</h1>
+  <h2>... and my new Astro site!</h2>
 
-    <h1>About me</h1>
-    <h2>... and my new Astro site!</h2>
+  <p>
+    I am working through Astro's introductory tutorial. This is the second page on my
+    website, and it's the first one I built myself!
+  </p>
 
-    <p>
-      I am working through Astro's introductory tutorial. This is the second page on my
-      website, and it's the first one I built myself!
-    </p>
+  <p>
+    This site will update as I complete more of the tutorial, so keep checking back and
+    see how my journey is going!
+  </p>
 
-    <p>
-      This site will update as I complete more of the tutorial, so keep checking back and
-      see how my journey is going!
-    </p>
-  </body>
-</html>
+  <p>Here are a few facts about me:</p>
+  <ul>
+    <li>My name is {identity.firstName}</li>
+    <li>I live in {identity.country}</li>
+    <li>I am a {identity.occupation}</li>
+    <li>I enjoy: {identity.hobbies.join(', ')}</li>
+  </ul>
+
+  <p>My skills are:</p>
+  <ul>
+    {skills.map((skill) => <li class='skill'>{skill}</li>)}
+  </ul>
+
+  {happy && <p>I am happy to be learning Astro!</p>}
+  {finished && <p>I am finished with the tutorial!</p>}
+  {goal && <p>My goal is to finish in the {goal} days.</p>}
+
+  <script>
+    import '../scripts/scrolling.js';
+  </script>
+</BaseLayout>
